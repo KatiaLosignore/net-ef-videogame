@@ -64,6 +64,23 @@ while (true)
                 }
             }
            break;
+        case 2:
+            Console.Write("Inserisci l'id del videogioco da cercare: ");
+            int idGame = int.Parse(Console.ReadLine());
+
+            Videogame videogameSerched = Videogame.SearchById(idGame);
+
+            if (videogameSerched == null)
+            {
+                Console.WriteLine($"Il videogioco con ID {idGame} non esiste!");
+            }
+            else
+            {
+                Console.WriteLine($"Il videogioco con ID {idGame} è: ");
+                Console.WriteLine($"- {videogameSerched}");
+            }
+            Console.WriteLine();
+            break;
         case 5:
             Console.WriteLine("Inserisci i dati della Software House: ");
             Console.Write("Inserisci il nome della software house: ");

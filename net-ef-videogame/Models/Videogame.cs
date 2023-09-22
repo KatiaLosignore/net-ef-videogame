@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using net_ef_videogame.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -30,6 +32,29 @@ namespace net_ef_videogame.Models
 
 
         // METODI
+
+        public static Videogame SearchById(int id)
+        {
+            using (VideogameSoftContext db = new VideogameSoftContext())
+            {
+                try
+                {
+                    Videogame result = db.Videogames.Where(game => game.VideogameId == id).First();
+
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                return null;
+            }
+        }
+        
+
+
+
+
         public override string ToString()
         {
             return $"ID: {VideogameId} Nome: {Name} Descrizione: {Overview} Data di rilascio: {ReleaseDate.ToString("dd/MM/yyyy")}";
