@@ -17,7 +17,7 @@ namespace net_ef_videogame.Models
 
         public string Overview { get; set; }
 
-        public DateTime ReleaseDate { get; private set; }
+        public DateTime ReleaseDate { get; set; }
 
 
 

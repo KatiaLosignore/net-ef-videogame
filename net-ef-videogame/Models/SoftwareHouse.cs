@@ -33,5 +33,5 @@ namespace net_ef_videogame.Models
         }
     }
 
-    }
+    
 }
