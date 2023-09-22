@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Query;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using net_ef_videogame.Database;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,42 @@ namespace net_ef_videogame.Models
             }
         }
         
+        public static List<Videogame> SearchByName(string name)
+        {
+            
+            using (VideogameSoftContext db = new VideogameSoftContext())
+            {
+                try
+                {
+                    List<Videogame> videogameList = db.Videogames.Where(list => list.Name.Contains(name)).Include(Videogames => Videogames.SoftwareHouse).ToList();
+      
+                     return videogameList;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
 
+                   return null;
+
+            }
+        }
+
+        public static string ListToString(List<Videogame> videogameList)
+        {
+            if (videogameList.Count == 0)
+                return "Non ci sono videogiochi che corrispondono alla tua ricerca!";
+
+            string result = string.Empty;
+
+            foreach (Videogame videogame in videogameList)
+            {
+                result += $"\r\n\t{videogame}";
+
+            }
+
+            return result;
+        }
 
 
 

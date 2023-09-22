@@ -81,6 +81,13 @@ while (true)
             }
             Console.WriteLine();
             break;
+        case 3:
+            Console.WriteLine("Inserisci il nome del gioco da ricercare: ");
+            string nameSearch = Console.ReadLine();
+
+            Console.WriteLine(Videogame.ListToString(Videogame.SearchByName(nameSearch)));
+
+            break;
         case 5:
             Console.WriteLine("Inserisci i dati della Software House: ");
             Console.Write("Inserisci il nome della software house: ");
