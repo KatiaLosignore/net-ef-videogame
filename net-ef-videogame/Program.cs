@@ -2,6 +2,7 @@
 
 using net_ef_videogame.Database;
 using net_ef_videogame.Models;
+using net_ef_videogame;
 
 Console.WriteLine("Benvenuto nel nostro sistema di Videogame e SoftwareHouse!");
 
@@ -69,7 +70,7 @@ while (true)
             Console.Write("Inserisci l'id del videogioco da cercare: ");
             int idGame = int.Parse(Console.ReadLine());
 
-            Videogame videogameSerched = Videogame.SearchById(idGame);
+            Videogame videogameSerched = VideogameManager.SearchById(idGame);
 
             if (videogameSerched == null)
             {
@@ -86,14 +87,14 @@ while (true)
             Console.WriteLine("Inserisci il nome del gioco da ricercare: ");
             string nameSearch = Console.ReadLine();
 
-            Console.WriteLine(Videogame.ListToString(Videogame.SearchByName(nameSearch)));
+            Console.WriteLine(VideogameManager.ListToString(VideogameManager.SearchByName(nameSearch)));
 
             break;
         case 4:
             Console.Write("Inserisci l'id del videogioco che vuoi eliminare: ");
             int idVideogameToDelete = int.Parse(Console.ReadLine());
 
-            bool deleted = Videogame.DeleteVideogame(idVideogameToDelete);
+            bool deleted = VideogameManager.DeleteVideogame(idVideogameToDelete);
 
             if (deleted)
             {
@@ -148,7 +149,7 @@ while (true)
             while (!int.TryParse(Console.ReadLine(), out idSoftware))
                 Console.WriteLine("Inserisci un NUMERO!");
 
-            Console.WriteLine(Videogame.ListToString(Videogame.SearchBySoftwareHouse(idSoftware)));
+            Console.WriteLine(VideogameManager.ListToString(VideogameManager.SearchBySoftwareHouse(idSoftware)));
 
             break;
         case 7:
