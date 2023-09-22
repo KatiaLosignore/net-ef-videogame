@@ -27,7 +27,7 @@ namespace net_ef_videogame.Models
 
         public int SoftwareHouseId { get; set; }
 
-        public SoftwareHouse SoftwareHouse { get; set; }
+        public SoftwareHouse? SoftwareHouse { get; set; }
 
 
 
@@ -51,24 +51,24 @@ namespace net_ef_videogame.Models
                 return null;
             }
         }
-        
+
         public static List<Videogame> SearchByName(string name)
         {
-            
+
             using (VideogameSoftContext db = new VideogameSoftContext())
             {
                 try
                 {
                     List<Videogame> videogameList = db.Videogames.Where(list => list.Name.Contains(name)).Include(Videogames => Videogames.SoftwareHouse).ToList();
-      
-                     return videogameList;
+
+                    return videogameList;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
 
-                   return null;
+                return null;
 
             }
         }
@@ -111,13 +111,39 @@ namespace net_ef_videogame.Models
             }
         }
 
-
-    public override string ToString()
+        public static List<Videogame> SearchBySoftwareHouse(int idSoft)
         {
-            return $"ID: {VideogameId} Nome: {Name} Descrizione: {Overview} Data di rilascio: {ReleaseDate.ToString("dd/MM/yyyy")}";
+            using (VideogameSoftContext db = new VideogameSoftContext())
+            {
+                List<Videogame> resultList = db.Videogames.Where(Videogame => Videogame.SoftwareHouseId == idSoft).Include(Videogames => Videogames.SoftwareHouse).ToList();
+
+                return resultList;
+            }
         }
 
+        public override string ToString()
+        {
+            string reppresentation = @$"
+            ID: {VideogameId}
+            Nome: {Name}
+            Descrizione: {Overview}
+            Data di Rilascio: {ReleaseDate.ToString("dd/MM/yyyy")}
+            ";          
+            if (SoftwareHouse != null)
+            {
+                reppresentation += @$"
+            SoftwareHouse: {SoftwareHouse.Name}
+            ";
+            }
+
+            return reppresentation;
+        }
 
     }
+
 }
 
+
+
+
+	

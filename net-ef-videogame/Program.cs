@@ -13,7 +13,8 @@ while (true)
     - 3: Ricerca tutti i videogiochi aventi il nome contenente una determinata stringa inserita in input;
     - 4: Cancella un videogioco;
     - 5: Inserisci una nuova software house;
-    - 6: Chiudi il programma;
+    - 6: Inserisci l'id della software house della quale mostrare i videogames;
+    - 7: Chiudi il programma;
     ");
 
 
@@ -141,6 +142,16 @@ while (true)
             }
             break;
         case 6:
+            Console.WriteLine("Inserisci id della software-house");
+
+            int idSoftware;
+            while (!int.TryParse(Console.ReadLine(), out idSoftware))
+                Console.WriteLine("Inserisci un NUMERO!");
+
+            Console.WriteLine(Videogame.ListToString(Videogame.SearchBySoftwareHouse(idSoftware)));
+
+            break;
+        case 7:
             Console.WriteLine("Il programma è chiuso!");
             Environment.Exit(0);
             break;
