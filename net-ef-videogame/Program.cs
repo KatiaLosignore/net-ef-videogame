@@ -88,6 +88,21 @@ while (true)
             Console.WriteLine(Videogame.ListToString(Videogame.SearchByName(nameSearch)));
 
             break;
+        case 4:
+            Console.Write("Inserisci l'id del videogioco che vuoi eliminare: ");
+            int idVideogameToDelete = int.Parse(Console.ReadLine());
+
+            bool deleted = Videogame.DeleteVideogame(idVideogameToDelete);
+
+            if (deleted)
+            {
+                Console.WriteLine($"Il tuo videogioco con ID {idVideogameToDelete} è stato eliminato correttamente!");
+            }
+            else
+            {
+                Console.WriteLine("Il videogioco non è stato eliminato!");
+            }
+            break;
         case 5:
             Console.WriteLine("Inserisci i dati della Software House: ");
             Console.Write("Inserisci il nome della software house: ");
@@ -125,13 +140,14 @@ while (true)
                 }
             }
             break;
+        case 6:
+            Console.WriteLine("Il programma è chiuso!");
+            Environment.Exit(0);
+            break;
         default:
             Console.WriteLine("Non hai selezionato un opzione valida!");
             break;
 
-
     }
-
-
 
 }

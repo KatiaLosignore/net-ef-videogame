@@ -89,9 +89,30 @@ namespace net_ef_videogame.Models
             return result;
         }
 
+        public static bool DeleteVideogame(int idToDelete)
+        {
+            using (VideogameSoftContext db = new VideogameSoftContext())
+            {
+                try
+                {
+                    Videogame idDelete = db.Videogames.Where(id => id.VideogameId == idToDelete).First();
+
+                    db.Remove(idDelete);
+                    db.SaveChanges();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+                return false;
+            }
+        }
 
 
-        public override string ToString()
+    public override string ToString()
         {
             return $"ID: {VideogameId} Nome: {Name} Descrizione: {Overview} Data di rilascio: {ReleaseDate.ToString("dd/MM/yyyy")}";
         }
